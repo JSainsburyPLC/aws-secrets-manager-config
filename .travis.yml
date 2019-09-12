@@ -1,0 +1,9 @@
+language: go
+go:
+  - 'stable'
+install: make setup
+script: make ci
+#after_success: TODO
+#  - bash <(curl -s https://codecov.io/bash)
+notifications:
+  email: false
