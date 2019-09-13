@@ -16,22 +16,27 @@ import (
 )
 
 type config struct {
-	ApiKey       string        `secret:"apikey"`
+	ApiKey       string        `secret:"/app-secrets/plaintext-secret"`
+	AppSecrets   appSecrets    `secret:"/my-app-secrets/json-secret"`
 	Port         int           `env:"PORT" envDefault:"3000"`
 	IsProduction bool          `env:"PRODUCTION"`
 	Hosts        []string      `env:"HOSTS" envSeparator:":"`
 	Duration     time.Duration `env:"DURATION"`
 }
 
+type appSecrets struct {
+    SomeKey string `json:"some_key"`
+}
+
 func main() {
 	cfg := config{}
 	awsSession  := ...
-	conf.Parse(&cfg, "/my-app-secrets/login", secretsmanager.New(awsSession))
+	conf.Parse(&cfg, secretsmanager.New(awsSession))
 }
 ```
 
 ## Constraints
 
-* Secrets must be defined as JSON in AWS Secrets Manager. Keys/Value pairs are mapped to the Go struct based on the `secret` tag.
-* Secrets values must be strings
+* Secrets must be defined as either JSON or plaintext in AWS Secrets Manager. 
+* Keys/Value pairs are mapped to the Go struct based on the `secret` tag.
 * Secrets are required - they must be defined or the code will panic. We prefer to load the secrets on startup and fail fast if the secret value is not set.
