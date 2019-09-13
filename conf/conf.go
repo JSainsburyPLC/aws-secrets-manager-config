@@ -43,6 +43,9 @@ func Parse(x interface{}, secretKey string, secretsManager secretsmanageriface.S
 			}
 
 			confField := reflect.ValueOf(x).Elem().Field(i)
+			if confField.Kind() != reflect.String {
+				return fmt.Errorf("incorrect type. Expected a string for field '%s'", tag)
+			}
 			if confField.IsValid() && confField.CanSet() {
 				confField.SetString(secretValue)
 			}

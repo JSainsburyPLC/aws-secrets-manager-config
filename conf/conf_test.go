@@ -77,3 +77,23 @@ func TestParse_ErrorIfPayloadNotJSON(t *testing.T) {
 
 	assert.EqualError(t, err, "expected a JSON payload. Plaintext secrets are not currently supported")
 }
+
+func TestParse_ErrorIfUnsupportedType(t *testing.T) {
+	type configWithInvalidType struct {
+		Env      string `env:"ENV,required"`
+		MyApiKey int    `secret:"ApiKey"`
+	}
+
+	ctrl := gomock.NewController(t)
+	secretsManager := mocks.NewMockSecretsManager(ctrl)
+	_ = os.Setenv("ENV", "staging")
+	secretPayload := `{"ApiKey": "1234567890"}`
+	secretsManager.EXPECT().
+		GetSecretValue(&secretsmanager.GetSecretValueInput{SecretId: aws.String("/my-ns/my-secret")}).
+		Return(&secretsmanager.GetSecretValueOutput{SecretString: &secretPayload}, nil)
+	var cfg configWithInvalidType
+
+	err := Parse(&cfg, "/my-ns/my-secret", secretsManager)
+
+	assert.EqualError(t, err, "incorrect type. Expected a string for field 'ApiKey'")
+}
