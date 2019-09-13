@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/JSainsburyPLC/aws-secrets-manager-config.svg?branch=master)](https://travis-ci.org/JSainsburyPLC/aws-secrets-manager-config)
+
 # aws-secrets-manager-config
 
 Wraps [caarlos0/env](https://github.com/caarlos0/env) to provide a single view of configuration from the environment and secrets from AWS Secrets Manager.
