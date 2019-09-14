@@ -76,4 +76,3 @@ func fetchAWSSecret(secretsManager secretsmanageriface.SecretsManagerAPI, key st
 	}
 	return *output.SecretString, nil
 }
-

@@ -82,7 +82,7 @@ func TestParse_ErrorIfSecretEmpty(t *testing.T) {
 
 func TestParse_ErrorIfUnsupportedType(t *testing.T) {
 	type configWithInvalidType struct {
-		MyApiKey int    `secret:"/my-ns/my-plaintext-secret"`
+		MyApiKey int `secret:"/my-ns/my-plaintext-secret"`
 	}
 	ctrl := gomock.NewController(t)
 	defer ctrl.Finish()
