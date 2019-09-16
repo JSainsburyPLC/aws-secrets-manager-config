@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/JSainsburyPLC/aws-secrets-manager-config.svg?branch=master)](https://travis-ci.org/JSainsburyPLC/aws-secrets-manager-config)
+[![Build Status](https://img.shields.io/travis/JSainsburyPLC/aws-secrets-manager-config.svg?logo=travis&style=for-the-badge)](https://travis-ci.org/JSainsburyPLC/aws-secrets-manager-config)
 
 # aws-secrets-manager-config
 
