@@ -1,8 +1,8 @@
 package conf
 
 import (
-	"aws-secrets-manager-config/mocks"
 	"errors"
+	"github.com/JSainsburyPLC/aws-secrets-manager-config/mocks"
 	"os"
 	"testing"
 
