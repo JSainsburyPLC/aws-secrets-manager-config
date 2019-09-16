@@ -1,4 +1,4 @@
-module aws-secrets-manager-config
+module github.com/JSainsburyPLC/aws-secrets-manager-config
 
 go 1.13
 
